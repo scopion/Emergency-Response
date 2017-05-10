@@ -1,0 +1,27 @@
+MCAsmInfoDarwin.lo: llvm/lib/MC/MCAsmInfoDarwin.cpp \
+ llvm/include/llvm/MC/MCAsmInfoDarwin.h llvm/include/llvm/MC/MCAsmInfo.h \
+ llvm/include/llvm/MC/MCDirectives.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../include/c++/4.4.7/cassert \
+ /usr/include/assert.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h
+
+llvm/include/llvm/MC/MCAsmInfoDarwin.h:
+
+llvm/include/llvm/MC/MCAsmInfo.h:
+
+llvm/include/llvm/MC/MCDirectives.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../include/c++/4.4.7/cassert:
+
+/usr/include/assert.h:
+
+/usr/include/features.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:

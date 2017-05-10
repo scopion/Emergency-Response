@@ -1,0 +1,5 @@
+onaccess_fan.o: onaccess_fan.c ../clamav-config.h ../platform.h
+
+../clamav-config.h:
+
+../platform.h:

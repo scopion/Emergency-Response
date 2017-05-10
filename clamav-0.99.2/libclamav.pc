@@ -1,0 +1,12 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib64
+includedir=${prefix}/include
+
+Name: libclamav
+Description: A GPL virus scanner
+Version: 0.99.2
+Libs: -L${libdir} -lclamav
+Libs.private:  -lz
+Cflags: -I${includedir}
+

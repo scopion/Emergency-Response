@@ -1,0 +1,4 @@
+IncludeFile.lo: llvm/lib/System/IncludeFile.cpp \
+ llvm/include/llvm/System/IncludeFile.h
+
+llvm/include/llvm/System/IncludeFile.h:

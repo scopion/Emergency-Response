@@ -1,0 +1,5 @@
+onaccess_scth.o: onaccess_scth.c ../clamav-config.h ../platform.h
+
+../clamav-config.h:
+
+../platform.h:

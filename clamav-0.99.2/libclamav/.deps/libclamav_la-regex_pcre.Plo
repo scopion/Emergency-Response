@@ -1,0 +1,5 @@
+libclamav_la-regex_pcre.lo: regex_pcre.c ../clamav-config.h ../platform.h
+
+../clamav-config.h:
+
+../platform.h:

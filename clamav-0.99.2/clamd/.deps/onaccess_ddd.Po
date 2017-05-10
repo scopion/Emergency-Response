@@ -1,0 +1,5 @@
+onaccess_ddd.o: onaccess_ddd.c ../clamav-config.h ../platform.h
+
+../clamav-config.h:
+
+../platform.h:
