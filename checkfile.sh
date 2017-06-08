@@ -1,7 +1,7 @@
 #!/bin/bash
 
-set -e
-set -x
+#set -e
+#set -x
 
 
 
@@ -18,18 +18,24 @@ fi
 mkdir -p check
 
 
-unhide sys >check/unhide.log
-unhide brute >>check/unhide.log
-unhide proc >>check/unhide.log
-unhide procall >>check/unhide.log
-unhide procfs >>check/unhide.log
-unhide quick >>check/unhide.log
-unhide reverse >>check/unhide.log
-unhide-tcp >>check/unhide.log
+#rkhunter --update
+nohup rkhunter -c --sk >>check/rkhunter.log 
+#cp nohup.out check/rkhunter.log
+
+nohup unhide sys >>check/unhide.log
+nohup unhide brute >>check/unhide.log
+nohup unhide proc >>check/unhide.log
+nohup unhide procall >>check/unhide.log
+nohup unhide procfs >>check/unhide.log
+nohup unhide quick >>check/unhide.log
+nohup unhide reverse >>check/unhide.log
+nohup unhide-tcp >>check/unhide.log
 
 freshclam
-#nohup clamscan -r --bell -i / > check/clamav.log 2>&1
+nohup clamscan -r --bell -i / >> check/clamav.log 2>&1
 
+chkconfig --list >> check/services.log
+#systemctl list-unit-files
 echo '查看passwd最后修改时间'
 ls -la /etc/passwd
 echo '查看是否存在特权用户'
@@ -42,16 +48,13 @@ echo '检查远程服务'
 cat /etc/inetd.conf | grep -v "^#"
 echo '排查计划任务'
 ls -la /var/spool/cron/
-ls -la /etc/cron
+ls -la /etc/cron*
 echo '查看隐藏进程及端口'
 cat check/unhide.log
 echo '查看病毒文件'
-cat check/clamav.log
-chkconfig --list > check/services.log
-#systemctl list-unit-files
-#rkhunter --update
+tail -10 check/clamav.log
 
 echo '查看恶意文件'
-rkhunter -c --sk | grep Warning
-#cp /var/log/rkhunter/rkhunter.log check/rkhunter.log
-
+cat check/rkhunter.log | grep Warning
+echo 'servicelist'
+cat check/services.log
