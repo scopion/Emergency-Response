@@ -56,5 +56,5 @@ tail -10 check/clamav.log
 
 echo '查看恶意文件'
 cat check/rkhunter.log | grep Warning
-echo 'servicelist'
+echo '查看机器服务列表'
 cat check/services.log
