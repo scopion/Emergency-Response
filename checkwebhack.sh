@@ -28,4 +28,7 @@ grep -i 'sqlmap' *.log
 #跨站漏洞记录
 grep -i 'script' *.log 
 #查找存在script的行。
-
+grep -i 'upload' *.log 
+grep -i 'wget' *.log 
+grep -i 'cat' *.log 
+grep -i 'ls' *.log 

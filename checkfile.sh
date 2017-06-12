@@ -35,7 +35,7 @@ freshclam
 nohup clamscan -r --bell -i / >> check/clamav.log 2>&1
 
 chkconfig --list >> check/services.log
-#systemctl list-unit-files
+systemctl list-unit-files >> check/services.log
 echo '查看passwd最后修改时间'
 ls -la /etc/passwd
 echo '查看是否存在特权用户'
@@ -58,3 +58,5 @@ echo '查看恶意文件'
 cat check/rkhunter.log | grep Warning
 echo '查看机器服务列表'
 cat check/services.log
+find / -name “.rhosts” –print 
+find / -name “.forward” –print 
