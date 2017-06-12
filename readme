@@ -15,16 +15,18 @@ If you ARE using a Linux kernel >= 2.6
 Else (Linux < 2.6, *BSD, Solaris and other Unice)
       gcc --static unhide-posix.c -o unhide-posix
       ln -s unhide unhide-posix
+	  
+unhide-20121229文件夹是编译好的可执行文件
 
 使用
-nohup unhide sys >>check/unhide.log
-nohup unhide brute >>check/unhide.log
-nohup unhide proc >>check/unhide.log
-nohup unhide procall >>check/unhide.log
-nohup unhide procfs >>check/unhide.log
-nohup unhide quick >>check/unhide.log
-nohup unhide reverse >>check/unhide.log
-nohup unhide-tcp >>check/unhide.log
+./unhide sys >>check/unhide.log
+./unhide brute >>check/unhide.log
+./unhide proc >>check/unhide.log
+./unhide procall >>check/unhide.log
+./unhide procfs >>check/unhide.log
+./unhide quick >>check/unhide.log
+./unhide reverse >>check/unhide.log
+./unhide-tcp >>check/unhide.log
 
 二、rkhunter
 安装
@@ -33,10 +35,13 @@ nohup unhide-tcp >>check/unhide.log
 使用
 rkhunter -c --sk >>check/rkhunter.log 
 
+卸载
+	./installer.sh --remove
 三、chkrootkit
 
 chkrootkit文件夹是编译好的可执行文件
 使用
+./chkrootkit -p 
 ./chkrootkit -p commands #commands是一个存放原生命令的目录。检查过程中调用这个目录里面的命令而不再使用系统命令（有被篡改的风险）。
 
 四、clamav
@@ -59,3 +64,8 @@ clamscan        --查杀当前目录下的文件
 clamscan -r     --查杀当前目录的所有文件及目录 
 clamscan dir    --查杀dir目录 
 clamscan -r dir --查杀目录dir下的所有文件及目录
+
+
+卸载
+./configure --with-user=root --with-group=root
+sudo make uninstall
