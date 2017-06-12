@@ -1,5 +1,0 @@
-onaccess_hash.o: onaccess_hash.c ../clamav-config.h ../platform.h
-
-../clamav-config.h:
-
-../platform.h:

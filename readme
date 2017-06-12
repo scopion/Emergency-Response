@@ -46,7 +46,6 @@ chkrootkit文件夹是编译好的可执行文件
 make 
 make install
 
-文件夹clamav-0.99.2是编译完成的源码，可以直接使用make install 安装。
 
 使用
 配置文件

@@ -1,3 +1,0 @@
-libclamav_la-rijndael.lo: rijndael.c rijndael.h
-
-rijndael.h:

@@ -1,3 +1,0 @@
-Dwarf.lo: llvm/lib/Support/Dwarf.cpp llvm/include/llvm/Support/Dwarf.h
-
-llvm/include/llvm/Support/Dwarf.h:
