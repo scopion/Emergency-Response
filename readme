@@ -40,36 +40,23 @@ chkrootkit文件夹是编译好的可执行文件
 ./chkrootkit -p commands #commands是一个存放原生命令的目录。检查过程中调用这个目录里面的命令而不再使用系统命令（有被篡改的风险）。
 
 四、clamav
-编译
-./configure
-make && make install
+编译安装
+ yum install openssl* -y
+./configure  --with-user=root --with-group=root
+make 
+make install
+
+文件夹clamav-0.99.2是编译完成的源码，可以直接使用make install 安装。
 
 使用
 配置文件
-1、配置/etc/clam.conf文件
-
-#cd /opt/clamav
-#vi etc/clam.conf
-# Example 注释掉这一行. 第8 行　　
- LogFile /opt/clamav/logs/clamd.log              删掉前面的注释目录改为logs下面 第14行
- /opt/clamav/updata/clamd.pid           删掉前面的注释路径改一下 第57行
- /opt/clamav/updata 同上 第65行
-
-2、配置freshclam.conf文件
-
-#vi etc/freshclam.conf
-#Example 注释掉这一行
-DatabaseDirectory /opt/clamav/updata
-UpdateLogFile /opt/clamav/logs/freshclam.log
-PidFile /opt/clamav/updata/freshclam.pid	
-
-
-
+将freshclam.conf 文件复制到/usr/local/etc/
 1、升级
-#/opt/clamav/bin/freshclam        (升级病毒库)   保证你的LINUX可以正常上网哦.
+freshclam        (升级病毒库)   保证你的LINUX可以正常上网哦.
+mkdir -p /var/lib/clamav/
+文件clamdb.zip 是2017.6.12升级的病毒库文件。解压之后放在/var/lib/clamav/下。
 2、杀毒
-
-#/opt/clamav/bin/clamscan        --查杀当前目录下的文件
-#/opt/clamav/bin/clamscan -r     --查杀当前目录的所有文件及目录 
-#/opt/clamav/bin/clamscan dir    --查杀dir目录 
-#/opt/clamav/bin/clamscan -r dir --查杀目录dir下的所有文件及目录
+clamscan        --查杀当前目录下的文件
+clamscan -r     --查杀当前目录的所有文件及目录 
+clamscan dir    --查杀dir目录 
+clamscan -r dir --查杀目录dir下的所有文件及目录
