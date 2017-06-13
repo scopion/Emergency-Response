@@ -163,6 +163,7 @@ cd clamav-0.99.2
 ./configure  --with-user=root --with-group=root
 make 
 make install
+cd ..
 cp freshclam.conf /usr/local/etc/
 mkdir -p /var/lib/clamav/
 tar xf clamdb.tar.gz -C /var/lib/clamav/
