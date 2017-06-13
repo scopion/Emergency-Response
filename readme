@@ -19,14 +19,14 @@ Else (Linux < 2.6, *BSD, Solaris and other Unice)
 unhide-20121229文件夹是编译好的可执行文件
 
 使用
-./unhide sys >>check/unhide.log
-./unhide brute >>check/unhide.log
-./unhide proc >>check/unhide.log
-./unhide procall >>check/unhide.log
-./unhide procfs >>check/unhide.log
-./unhide quick >>check/unhide.log
-./unhide reverse >>check/unhide.log
-./unhide-tcp >>check/unhide.log
+./unhide sys >>/tmp/unhide.log
+./unhide brute >>/tmp/unhide.log
+./unhide proc >>/tmp/unhide.log
+./unhide procall >>/tmp/unhide.log
+./unhide procfs >>/tmp/unhide.log
+./unhide quick >>/tmp/unhide.log
+./unhide reverse >>/tmp/unhide.log
+./unhide-tcp >>/tmp/unhide.log
 
 二、rkhunter
 安装
