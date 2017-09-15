@@ -16,9 +16,9 @@ if [ $# -eq 2 ];then
 else
     WEBCHK=0
 fi
-echo -e "\033[33m#### 0x0. Check rootkit  \033[0m"
+#echo -e "\033[33m#### 0x0. Check rootkit  \033[0m"
 if [ -f /etc/redhat-release ]; then
-	yum -y update
+#	yum -y update
 	yum -y install epel-release
 	yum -y groupinstall 'Development Tools'
 	yum install -y wget git rkhunter unhide clamav
@@ -83,10 +83,10 @@ cat /etc/inetd.conf | grep -v "^#"
 echo -e "\033[33m#### 0x4. Check process info \033[0m"
 echo -e "\033[33m|--> Check ps result \033[0m"
 ps axu | grep -v ]$
-echo -e "\033[33m|--> Check hidden process \033[0m"
-ps -ef | awk '{print $2}' | sort -n | uniq >1
-ls /proc | sort -n |uniq >2
-diff 1 2 | awk '{printf"%s ",$0}'
+#echo -e "\033[33m|--> Check hidden process \033[0m"
+#ps -ef | awk '{print $2}' | sort -n | uniq >1
+#ls /proc | sort -n |uniq >2
+#diff 1 2 | awk '{printf"%s ",$0}'
 echo ""
 
 echo -e "\033[33m#### 0x5. Check network info \033[0m"
@@ -104,9 +104,9 @@ cat /proc/sys/net/ipv4/ip_forward
 echo -e "\033[33m|--> Check rpc info\033[0m"
 rpcinfo -p
 echo -e "\033[33m|--> Check network service info\033[0m"
-netstat -nap | grep -vE 'unix|raw'
+netstat -nap | grep LISTEN
 echo -e "\033[33m|--> Check process <-> port info\033[0m"
-lsof -i
+lsof -i > /tmp/checklsof
 echo ""
 
 echo -e "\033[33m#### 0x6. Check file and module info \033[0m"
@@ -143,20 +143,24 @@ echo ""
 
 echo -e "\033[33m#### 0x8. Check web log \033[0m"
 echo -e "\033[33m|--> Check webshell \033[0m"
-find $WEBDIR/ -type f -name '*.php' | xargs egrep '(phpspy|c99sh|milw0rm|eval\(gunerpress|eval\(base64_decode|spider_bc|@$)' | awk -F : '{print $1}' >> /tmp/checkweb.log
+find / -type f -name '*.php' | xargs egrep '(phpspy|c99sh|milw0rm|eval\(gunerpress|eval\(base64_decode|spider_bc|@$)' | awk -F : '{print $1}' >> /tmp/checkweb.log
+find / -type f -name "*.jsp" |xargs egrep 'exec|request.getParameter' >> /tmp/checkweb.log
+find / -type f -name "*.asp*" |xargs egrep 'eval|execute|Request|VBScript'>> /tmp/checkweb.log
 grep -i 'select%20|sqlmap|script|phpinfo()|upload|cat' $LOGDIR/*log  | grep 500 | grep -i \.php >> /tmp/checkweb.log
+find / -type f -name '*tunnel*'>> /tmp/checkweb.log
+find / -type f -name '*struts*'>> /tmp/checkweb.log
 cat /tmp/checkweb.log 
 echo ""
 
 echo 'check backdoors'
-find / -name “.rhosts” –print 
-find / -name “.forward” –print 
+find / -name “.rhosts” -print 
+find / -name “.forward” -print 
 echo 'check syslogs'
 ls -la -h /var/log/messages
 ls -la -h /var/log/maillog
 ls -la /var/log/mail/
 
-echo -e "\033[33m|--> Check av\033[0m"
-freshclam  >/dev/null 2>&1 
-clamscan -r --bell -i / > /tmp/clamav.log 2>&1
-tail -10  /tmp/clamav.log
+#echo -e "\033[33m|--> Check av\033[0m"
+#freshclam  >/dev/null 2>&1 
+#clamscan -r --bell -i / > /tmp/clamav.log 2>&1
+#tail -10  /tmp/clamav.log

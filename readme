@@ -1,23 +1,30 @@
-
-checkfile.sh 为检查文件是否被植入病毒的脚本。执行日志存放在check 这个文件夹下
-checkwebhack.sh 为在web程序目录根日志目录查找入侵痕迹的脚本。执行日志存放在web程序目录下的checkweb.log
-
-网络情况不好的时候要自己编译脚本中的工具。看情况使用。
-
-一、unhide
-编译
+工具介绍
+Linux
+Chkrootkit ：文件对比工具。使用系统命令检查系统命令文件有没有被篡改。
+在操作系统刚被安装之后，或者说服务器开放之前，备份 chkrootkit 使用的系统命令，在一些必要的时候（怀疑系统命令已被修改的情况等等），让 chkrootkit 使用初始备份的系统命令进行工作。
+安装包：chkrootkit.tar.gz
+编译：make sense
+使用：
+备份系统初始命令
+Mkdir –p /usr/share/.commands/
+cp $(which --skip-alias awk cut echo find egrep id head ls netstat ps strings sed uname ssh) /usr/share/.commands/
+检测病毒
+./chkrootkit 
+./chkrootkit -p /usr/share/.commands/  #commands是一个存放原生命令的目录。检查过程中调用这个目录里面的命令而不再使用系统命令（有被篡改的风险）
+Unhide：隐藏进程及端口查询工具。使用多种方式查询隐藏进程
+安装包：unhide-20121229.tgz
+centos安装：yum -y install epel-release
+yum install -y unhide 
+ubuntu安装：apt-get -y install  unhide 
+编译：
 If you ARE using a Linux kernel >= 2.6
       gcc -Wall -O2 --static -pthread unhide-linux*.c unhide-output.c -o unhide-linux
       gcc -Wall -O2 --static unhide_rb.c -o unhide_rb
       gcc -Wall -O2 --static unhide-tcp.c unhide-tcp-fast.c unhide-output.c -o unhide-tcp
-      ln -s unhide unhide-linux
-
+      ln -s unhide-linux unhide
 Else (Linux < 2.6, *BSD, Solaris and other Unice)
       gcc --static unhide-posix.c -o unhide-posix
       ln -s unhide unhide-posix
-	  
-unhide-20121229文件夹是编译好的可执行文件
-
 使用
 ./unhide sys >>/tmp/unhide.log
 ./unhide brute >>/tmp/unhide.log
@@ -27,45 +34,55 @@ unhide-20121229文件夹是编译好的可执行文件
 ./unhide quick >>/tmp/unhide.log
 ./unhide reverse >>/tmp/unhide.log
 ./unhide-tcp >>/tmp/unhide.log
-
-二、rkhunter
-安装
-    ./installer.sh --install
-
-使用
-rkhunter -c --sk >>check/rkhunter.log 
-
-卸载
-	./installer.sh --remove
-三、chkrootkit
-
-chkrootkit文件夹是编译好的可执行文件
-使用
-./chkrootkit -p 
-./chkrootkit -p commands #commands是一个存放原生命令的目录。检查过程中调用这个目录里面的命令而不再使用系统命令（有被篡改的风险）。
-
-四、clamav
+unhide-20121229 文件夹是已编译好的。
+Clamav：Linux下病毒查杀程序。
+安装包：clamav-0.99.2.tar.gz
 编译安装
  yum install openssl* -y
 ./configure  --with-user=root --with-group=root
 make 
 make install
-
-
+centos安装：yum -y install epel-release
+yum install -y clamav
+ubuntu安装：apt-get -y install  clamav
 使用
 配置文件
 将freshclam.conf 文件复制到/usr/local/etc/
 1、升级
 freshclam        (升级病毒库)   保证你的LINUX可以正常上网哦.
 mkdir -p /var/lib/clamav/
-文件clamdb.zip 是2017.6.12升级的病毒库文件。解压之后放在/var/lib/clamav/下。
+文件clamdb.tar.gz 是2017.6.12升级的病毒库文件。解压之后放在/var/lib/clamav/下。
 2、杀毒
 clamscan        --查杀当前目录下的文件
 clamscan -r     --查杀当前目录的所有文件及目录 
 clamscan dir    --查杀dir目录 
 clamscan -r dir --查杀目录dir下的所有文件及目录
-
-
+nohup clamscan -r --bell -i / >> /tmp/clamav.log 
 卸载
 ./configure --with-user=root --with-group=root
 sudo make uninstall
+rkhunter：Linux下杀毒软件。
+安装包：rkhunter-1.4.2.tar.gz
+安装
+    ./installer.sh –install
+centos安装：yum -y install epel-release
+yum install -y rkhunter
+ubuntu安装：apt-get -y install  rkhunter
+使用
+rkhunter -c --sk >>check/rkhunter.log 
+卸载
+	./installer.sh --remove
+Windows
+365门神程序：365MSInst_V2.0.exe 。知道创宇出品防御产品
+官网：https://www.yunaq.com/365menshen/
+安全狗程序：safedogfwqV5.0，safedogIISV4.0.exe，safedogwzApache.exe
+官网：http://www.safedog.cn/
+隐藏进程排查工具：unhide.exe
+官网：http://www.unhide-forensics.info/
+
+脚本介绍：
+排查脚本
+liunx_security_check.sh
+
+offline.sh（还要修改）
+
