@@ -4,18 +4,18 @@
 # Check Abnormal User
 ###########################################################################
 
-if [ $# -eq 2 ];then
-    if [ -d $1 ] && [ -d $2 ];then
-        WEBCHK=1 
-        WEBDIR=$1
-        LOGDIR=$2
-    else
-        echo "Web dir $1 or $2 error, exit."
-        exit -1
-    fi 
-else
-    WEBCHK=0
-fi
+#if [ $# -eq 2 ];then
+#    if [ -d $1 ] && [ -d $2 ];then
+#        WEBCHK=1 
+#        WEBDIR=$1
+#        LOGDIR=$2
+#    else
+#        echo "Web dir $1 or $2 error, exit."
+#        exit -1
+#    fi 
+#else
+#    WEBCHK=0
+#fi
 #echo -e "\033[33m#### 0x0. Check rootkit  \033[0m"
 if [ -f /etc/redhat-release ]; then
 #	yum -y update
