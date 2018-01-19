@@ -36,7 +36,7 @@ Else (Linux < 2.6, *BSD, Solaris and other Unice)
 ./unhide quick >>/tmp/unhide.log
 ./unhide reverse >>/tmp/unhide.log
 ./unhide-tcp >>/tmp/unhide.log
-unhide-20121229 文件夹是已编译好的。
+unhide.tar.gz 文件夹是已编译好的。
 Clamav
 Clamav：Linux下病毒查杀程序。
 安装包：clamav-0.99.2.tar.gz

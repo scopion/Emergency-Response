@@ -23,7 +23,7 @@ cd Emergency-Response
 echo -e "\033[33m|--> Check rootkit\033[0m"
 tar xf rkhunter-1.4.2.tar.gz
 cd rkhunter-1.4.2
-./installer.sh –install
+./installer.sh --install
 rkhunter -c --sk > /tmp/rkhunter.log
 grep 'Warning' /tmp/rkhunter.log
 echo ""
@@ -142,7 +142,7 @@ echo ""
 echo -e "\033[33m#### 0x8. Check web log \033[0m"
 echo -e "\033[33m|--> Check webshell \033[0m"
 find / -type f -name '*.php' | xargs egrep '(phpspy|c99sh|milw0rm|eval\(gunerpress|eval\(base64_decode|spider_bc|@$)' | awk -F : '{print $1}' >> /tmp/checkweb.log
-find / -type f -name "*.jsp" |xargs egrep 'exec|request.getParameter' >> /tmp/checkweb.log
+find / -type f -name "*.jsp" |xargs egrep 'exec|getRuntime()' >> /tmp/checkweb.log
 find / -type f -name "*.asp*" |xargs egrep 'eval|execute|Request|VBScript'>> /tmp/checkweb.log
 grep -i 'select%20|sqlmap|script|phpinfo()|upload|cat' $LOGDIR/*log  | grep 500 | grep -i \.php >> /tmp/checkweb.log
 find / -type f -name '*tunnel*'>> /tmp/checkweb.log
